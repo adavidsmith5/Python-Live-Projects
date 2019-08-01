@@ -1,7 +1,11 @@
 <h2>Introduction</h2>
 <hr />
 
+<p>For four weeks of The Tech Academy, I worked on a team project developing entertainment and travel applications using Python and the Django framework. This was a great opportunity to get a real-world experience on a project with clear goals that needed to be met, and a limited amount of time in which to meet them. I learned what it is like to jump into the middle of a project and having to deal with bugs and utilizing or rewriting a previous programmer's code. I worked on stories involving back-end as well as front-end and gained vital experience working as part of a team.</p>
 
+The first story I took on was in the back-end of a page that would display information about the top five movies on IMDb. Although I laid the groundwork to include other information, the story I was working on only needed the names of the movies to be sent back to the view.
+
+```
 
 #Creating class for the movies. Just including title for now
 class Movie(models.Model):
@@ -43,9 +47,11 @@ def topfive(request):
 	context = {'imdb' : imdb}
 		
 	return render(request, 'movie/movie.html', context)
+  ```
   
+  My second story involved a mix of front-end and back-end work. I needed to create a way to display messages sent back and forth between users of the application like text messaging on a phone. I began to lay the ground work by creating a contacts list to store the different conversations based on which contact was sending the message.
   
-  
+  ```
   def conversations(request):
 	contacts = []
 	messages = Message.objects.filter(Q(sender=request.user) | Q(recipient=request.user)).order_by('-sent')
@@ -54,8 +60,33 @@ def topfive(request):
 			contacts.append(message.sender)
 	return render(request, 'chat/conversations.html', {'contacts': contacts, 'messages': messages})
   
+  ```
   
+  Then I was creating the styling to show the different contacts in a sidebar that the user could select from to see the conversation. I was also contrasting the to and from messages. At this point, I had only gotten as far as showing the contrast based on nth-children and not on who sent the message, so it was just changing the color every other message. The next step would have been to distinguish between the user and the person they were contacting.
   
+  HTML
+```
+<div class="wrapper">
+    <div class="box header">Messages</div>
+    <div class="box sidebar">
+        <nav>
+            <ul class="contactlist">
+                {% for contact in contacts %}
+                <li class="contact">{{ contact }}</li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+    <div class="box content">
+        {% for message in messages %}
+        <p>{{ message.messageBody }}</p>
+        {% endfor %}
+    </div>
+</div>
+```
+  
+  CSS
+  ```
   <style>
     .sidebar {
         grid-area: sidebar;
@@ -112,23 +143,4 @@ def topfive(request):
             background: darkblue;
         }
 </style>
-
-
-
-<div class="wrapper">
-    <div class="box header">Messages</div>
-    <div class="box sidebar">
-        <nav>
-            <ul class="contactlist">
-                {% for contact in contacts %}
-                <li class="contact">{{ contact }}</li>
-                {% endfor %}
-            </ul>
-        </nav>
-    </div>
-    <div class="box content">
-        {% for message in messages %}
-        <p>{{ message.messageBody }}</p>
-        {% endfor %}
-    </div>
-</div>
+```
