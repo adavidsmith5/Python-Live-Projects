@@ -1,4 +1,4 @@
-##Introduction
+<h2>Introduction</h2>
 <hr />
 
 <p>For four weeks of The Tech Academy, I worked on a team project developing personal and travel applications using Python and the Django framework. This was a great opportunity to get a real-world experience on a project with clear goals that needed to be met, and a limited amount of time in which to meet them. I learned what it is like to jump into the middle of a project and having to deal with bugs and utilizing or rewriting a previous programmer's code. I worked on stories involving back-end as well as front-end and gained vital experience working as part of a team.</p>
