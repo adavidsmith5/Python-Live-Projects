@@ -195,7 +195,9 @@ def airlineName(airlineCode):
 ```
 
 <h4>Calling the custom template filters in the view</h4>
+
 ```
+
 {% for trip in dataAPI %} -----------------------------------------------------Flight(s) Trip Offer #{{ forloop.counter }} Start------------------------------------------------------------- {{ trip.offerItems.0.services.0.segments.1.flightSegment.arrival.at|date:'SHORT_DATE_FORMAT' }}
 First Departure: {{ trip.offerItems.0.services.0.segments.0.flightSegment.departure.iataCode }}
 
