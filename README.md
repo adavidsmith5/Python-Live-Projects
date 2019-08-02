@@ -164,4 +164,56 @@ My first task was to change the layout of the schedule page. There originally wa
 
 ![alt text](https://github.com/adavidsmith5/pythonliveproject/blob/master/after_todolist.png)
 
+<p>The next task I took on was changing how information from the airline API was displayed. Originally there was no airline name and the departure time and date was displayed in a format that was unreadable for most people.</p>
+
+<h4>Custom Template Filters</h4>
+
+```
+amadeus = Client(
+		client_id=...
+		client_secret=...
+	)
+register = template.Library()
+
+#Quick calculation to get the price of the flight before taxes.
+@register.filter(name='pretax')
+@stringfilter
+def pretax(total,taxes):
+	total = float(total)
+	taxes = float(taxes)
+	pretax = total - taxes
+	return "% 12.2f" % pretax
+
+#Changing the date and time from a string to datetime so that the correct format can be used
+@register.filter(expects_localtime=True)
+@stringfilter
+def airlineName(airlineCode):
+	response = amadeus.reference_data.airlines.get(airlineCodes=airlineCode)
+	airline = response.data[0]['businessName']
+	return airline
+
+```
+
+<h4>Calling the custom template filters in the view</h4>
+```
+{% for trip in dataAPI %} -----------------------------------------------------Flight(s) Trip Offer #{{ forloop.counter }} Start------------------------------------------------------------- {{ trip.offerItems.0.services.0.segments.1.flightSegment.arrival.at|date:'SHORT_DATE_FORMAT' }}
+First Departure: {{ trip.offerItems.0.services.0.segments.0.flightSegment.departure.iataCode }}
+
+Airline: {{ trip.offerItems.0.services.0.segments.0.flightSegment.carrierCode|airlineName }}
+
+First Departure Terminal: {{ trip.offerItems.0.services.0.segments.0.flightSegment.departure.terminal }}
+
+First Departure Date/Time: {{ trip.offerItems.0.services.0.segments.0.flightSegment.departure.at|dateformat|date:'N j, Y, P' }}
+
+------------------
+First Arrival: {{ trip.offerItems.0.services.0.segments.0.flightSegment.arrival.iataCode }}
+
+First Arrival Terminal: {{ trip.offerItems.0.services.0.segments.0.flightSegment.arrival.terminal }}
+
+First Arrival Time: {{ trip.offerItems.0.services.0.segments.0.flightSegment.arrival.at|dateformat|date:'N j, Y, P' }}
+
+---Price---
+<!--using a custom template filter to take the total price and subtract the taxes to find the pretax price. Custom filters are in the templatetags directory-->
+<p><strong>Price:</strong> {{ trip.offerItems.0.price.total|pretax:trip.offerItems.0.price.totalTaxes }}</p>
+<p><strong>Taxes:</strong> {{ trip.offerItems.0.price.totalTaxes }}
 
