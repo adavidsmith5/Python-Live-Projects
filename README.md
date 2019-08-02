@@ -156,5 +156,10 @@ def topfive(request):
 
 My first task was to change the layout of the schedule page. There originally was a second navbar to select which page on the to-do list to go to, as well as add a new task. I got rid of the second navbar and set up a section to make it look better for creating new items on the to-do lists.
 
+<h4>Before</h4>
+
 ![alt text](https://github.com/adavidsmith5/Python-Live-Projects/blob/master/before_todolist%20larger%20(1).png)
+<h4>After</h4>
 ![alt text](https://github.com/adavidsmith5/pythonliveproject/blob/master/after_todolist.png)
+
+
