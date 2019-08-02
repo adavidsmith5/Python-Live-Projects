@@ -159,7 +159,9 @@ My first task was to change the layout of the schedule page. There originally wa
 <h4>Before</h4>
 
 ![alt text](https://github.com/adavidsmith5/Python-Live-Projects/blob/master/before_todolist%20larger%20(1).png)
+
 <h4>After</h4>
+
 ![alt text](https://github.com/adavidsmith5/pythonliveproject/blob/master/after_todolist.png)
 
 
