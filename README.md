@@ -154,3 +154,6 @@ def topfive(request):
 <p>This application was for users to find flights and hotels, set a budget, and make schedules for travel.</p>
 <br />
 
+My first task was to change the layout of the schedule page. There originally was a second navbar to select which page on the to-do list to go to, as well as add a new task. I got rid of the second navbar and set up a section to make it look better for creating new items on the to-do lists.
+
+![alt text]
