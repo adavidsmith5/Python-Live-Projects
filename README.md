@@ -216,4 +216,6 @@ First Arrival Time: {{ trip.offerItems.0.services.0.segments.0.flightSegment.arr
 <!--using a custom template filter to take the total price and subtract the taxes to find the pretax price. Custom filters are in the templatetags directory-->
 <p><strong>Price:</strong> {{ trip.offerItems.0.price.total|pretax:trip.offerItems.0.price.totalTaxes }}</p>
 <p><strong>Taxes:</strong> {{ trip.offerItems.0.price.totalTaxes }}
+```
 
+![alt text](https://github.com/adavidsmith5/Python-Live-Projects/blob/master/flight_info.png)
